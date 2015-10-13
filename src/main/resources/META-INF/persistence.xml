@@ -6,9 +6,9 @@
 		
 		<properties> 
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://127.13.141.2:3306/ords?characterEncoding=UTF-8"/>
-            <property name="hibernate.connection.username" value="adminK8by5GB"/>
-            <property name="hibernate.connection.password" value="jFBd9sP9nCWh"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://127.2.188.2:3306/ords?characterEncoding=UTF-8"/>
+            <property name="hibernate.connection.username" value="adminaQnYfbS"/>
+            <property name="hibernate.connection.password" value="TBWHKn39_NYg"/>
             
         </properties>
 		
