@@ -1,0 +1,585 @@
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" >
+
+    <ui:define name="title">
+        Информация о товаре
+    </ui:define>
+
+    <ui:define name="content">
+    
+    
+        <script src="smartpaginator.js" type="text/javascript"></script>
+    <link href="smartpaginator.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#green-contents').css('display', 'none');
+            $('#red-contents').css('display', 'none');
+            $('ul li').click(function () {
+                $('#red-contents').css('display', 'none');
+                $('#green-contents').css('display', 'none');
+                $('#black-contents').css('display', 'none');
+
+            });
+            
+       
+            $('#black').smartpaginator({ totalrecords: document.getElementById('mymenu').getElementsByTagName('div1').length, recordsperpage: 20, datacontainer: 'divs', dataelement: 'div1', initval: 0, next: 'Дальше', prev: 'Назад', first: 'Первая', last: 'Последняя', theme: 'black', controlsalways: false });
+
+            $('#red').smartpaginator({ totalrecords: 32, recordsperpage: 4, length: 4, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'red', controlsalways: true, onchange: function (newPage) {
+                $('#r').html('Page # ' + newPage);
+            }
+            });
+
+        });
+    </script>
+
+    <style type="text/css">
+    a { 
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   } 
+ .tilt {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+.tilt:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+        body
+        .contents
+        {
+            width: 91%; 
+			height: 600px;
+            margin: 0;
+        }
+        .contents > p
+        {
+            padding: 8px;
+        }
+        .table
+        {
+            width: 100%;
+            border-right: solid 1px #5f9000;
+        }
+        .table th, .table td
+        {
+            width: 16%;
+            height: 20px;
+            padding: 4px;
+            text-align: left;
+        }
+        .table th
+        {
+            border-left: solid 1px #5f9000;
+        }
+        .table td
+        {
+            border-left: solid 1px #5f9000;
+            border-bottom: solid 1px #5f9000;
+        }
+        .header
+        {
+    
+
+        }
+        #divs
+        {
+            margin: 0;
+            height: 550px;
+            font: verdana;
+            font-size: 14px;
+        }
+        #divs > div
+        {
+            width: 98%;
+            padding: 8px;
+        }
+        #divs > div p
+        {
+            width: 95%;
+            padding: 8px;
+        }
+        ul.tab
+        {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul.tab li
+        {
+            display: inline;
+            padding: 10px;
+            color: White;
+            cursor: pointer;
+        }
+        #container
+        {
+            width: 100%;
+            border: solid 1px red;
+        }
+    </style>
+    
+    <script type="text/javascript">
+    jsf.ajax.addOnEvent(handleAjax);
+
+    function handleAjax(data) {
+
+        var status = data.status;
+     	 
+        if (status == "success")
+        {
+        	$.stickr({note:document.getElementById('gen:hiddenId').value,className:'classic'});
+        }
+     } 
+
+
+$.stickr = function(o) {
+	var o = $.extend({   // настройки по умолчанию
+		time:5000, // количество мс, которое отображается сообщение
+		speed:'slow', // скорость исчезания
+		note:null, // текст сообщения
+		className:null, // класс, добавляемый к сообщению
+		sticked:false, // не выводить кнопку закрытия сообщения
+		position:{top:0,right:0} // позиция по умолчанию - справа сверху
+	}, o);
+	var stickers = $('#jquery-stickers'); // начинаем работу с главным элементом
+	if (!stickers.length) { // если его ещё не существует
+		$('body').prepend('<div id="jquery-stickers"></div>'); // добавляем его
+		var stickers = $('#jquery-stickers');
+		stickers.css('position','fixed').css(o.position); // позиционируем
+	}
+	var stick = $('<div class="stick"></div>'); // создаём стикер
+	stickers.append(stick); // добавляем его к родительскому элементу
+	if (o.className) stick.addClass(o.className); // если необходимо, добавляем класс
+        stick.html(o.note); // вставляем сообщение
+	if (o.sticked) { // если сообщение закреплено
+		var exit = $('<div class="exit"></div>');  // создаём кнопку выхода
+		stick.prepend(exit); // вставляем её перед сообщением
+		exit.click(function(){  // при клике
+			stick.fadeOut(o.speed,function(){ // скрываем стикер
+				$(this).remove(); // по окончании анимации удаляем его
+			})
+		});
+	} else { // если же нет
+		setTimeout(function(){ // устанавливаем таймер на необходимое время
+			stick.fadeOut(o.speed,function(){ // затем скрываем стикер
+				$(this).remove(); // по окончании анимации удаляем его
+			});
+		}, o.time);
+	}
+};
+    
+    </script> 
+<style type="text/css">
+    span.dot { position:absolute; text-indent: -1000em; }
+    span.rel { position: relative; }
+    span.arm{ top:-.52ex; }
+</style>
+    
+    <br></br>
+   			 
+    	   	 <h28>
+            <img alt="" src="#{index.currentSubcategory.picture}" />
+           <br></br>
+    	   	 Дизайнерское мыло ,которое уместно как подарок, интерьерный декор,приятный сюрприз, качественное </h28>
+    	   	 <br></br>
+    	   	 <h28>эксклюзивное средство гигиены.</h28>
+    	   	 <br></br>
+    	   	 <br></br> 	   	 
+            <div id="divs">  
+
+<ul id="mymenu">
+    	<c:forEach items="#{indexrequest.mass}" var="item">
+    	<c:if test="${item.product.n==1}">
+    	<c:if test="${item.product.nn==1}">
+    	
+    	
+        <div1>
+        <div class="product_box transition">
+        
+        
+         <h:form id="p${item.product.productid}">
+                <div align="center"><table><tr><td>
+      
+                
+               
+                </td><td> <c:if test="${cart.isCheck(item)}"><img alt="" src="images/gal.png" width="15" height="15"/></c:if></td><td>
+
+                
+        <h3214352>"<h:outputText value="#{item.product.name}"></h:outputText>"</h3214352></td><td>  <c:if test="${item.product.n==1}"><img alt="" src="images/3.gif" width="30" height="15"/></c:if></td>
+        </tr></table></div>
+        <a href="#info#{item.product.productid}" class="openModal"><div class="tilt pic" style="margin: 0px 0px;"><img alt="" width="170" height="125" src="#{item.product.picture}" /></div>
+        </a>
+        
+        	
+        
+        
+       
+        
+        
+
+        
+<table><tr><td>
+
+        <div align='left'>
+       <table cellspacing="0"><tr><td><h921>  Арт: </h921></td><td> <table  cellspacing="0"><tr><td><h924><u>
+        <!--  <c:if test="${item.product.productid == 1}">0</c:if>
+        <c:if test="${item.product.productid == 2}">0</c:if>
+        <c:if test="${item.product.productid == 3}">0</c:if>
+        <c:if test="${item.product.productid == 4}">0</c:if>
+        <c:if test="${item.product.productid == 5}">0</c:if>
+        <c:if test="${item.product.productid == 6}">0</c:if>
+        <c:if test="${item.product.productid == 7}">0</c:if>
+        <c:if test="${item.product.productid == 8}">0</c:if>
+        <c:if test="${item.product.productid == 9}">0</c:if>-->
+        0<h:outputText value="#{item.product.productid}"></h:outputText>
+        </u>
+        </h924></td></tr></table> </td></tr> </table>  
+        
+       </div>
+       
+            
+        
+        
+    </td><td>    
+<div align='right' style="margin-bottom: -27px;">     
+        
+        
+        <p style="font-size:1em"><h9221>        <h:outputText value="#{item.product.price}"></h:outputText> </h9221><span class="rel arm" style="color: #F7D3A9; font-size: 20px;">&#x584;</span></p>      
+        </div>
+       
+       </td></tr></table>        
+        <div align='center' style="bottom: 0;">
+        <table>
+        <tr>
+        <td><img alt="" style="padding-top: 4px;" src="images/templatemo_shopping_cart.png"/></td>
+       	<td> 
+       	     
+       	     
+       	     
+       	     <h:inputText onkeypress='return isNumberKey(event)' value="#{item.count}" size="1" class="edit bk" >
+       	     </h:inputText>
+       	     
+       	     
+       	 </td>
+        <td>
+        
+        
+        
+        <div id="menu8">
+        <ul><li>
+       <h:commandLink style="font-size:16px;" value="Заказать">
+             <f:ajax execute="@form" listener="${index.Add(item)}" render=":ren :p${item.product.productid} :gen"/>
+       </h:commandLink>
+		</li></ul>
+		</div>
+       
+      
+       
+       
+        </td>
+        </tr>
+        </table>
+        
+        
+       
+        </div>
+        </h:form>  
+              
+        <div class="cleaner"></div>
+        </div></div1></c:if></c:if>
+        </c:forEach>
+        <c:forEach items="#{indexrequest.mass}" var="item">
+    	<c:if test="${item.product.n==1}">
+    	<c:if test="${item.product.nn==0}">
+    	
+    	
+        <div1>
+        <div class="product_box transition">
+        
+        
+         <h:form id="p${item.product.productid}">
+                <div align="center"><table><tr><td>
+      
+                
+               
+                </td><td> <c:if test="${cart.isCheck(item)}"><img alt="" src="images/gal.png" width="15" height="15"/></c:if></td><td>
+
+                
+        <h3214352>"<h:outputText value="#{item.product.name}"></h:outputText>"</h3214352></td><td>  <c:if test="${item.product.n==1}"><img alt="" src="images/3.gif" width="30" height="15"/></c:if></td>
+        </tr></table></div>
+        <a href="#info#{item.product.productid}" class="openModal"><div class="tilt pic" style="margin: 0px 0px;"><img alt="" width="170" height="125" src="#{item.product.picture}" /></div>
+        </a>
+        
+        	
+        
+        
+       
+        
+        
+
+        
+<table><tr><td>
+
+        <div align='left'>
+       <table cellspacing="0"><tr><td><h921>  Арт: </h921></td><td> <table  cellspacing="0"><tr><td><h924><u>
+        <!--  <c:if test="${item.product.productid == 1}">0</c:if>
+        <c:if test="${item.product.productid == 2}">0</c:if>
+        <c:if test="${item.product.productid == 3}">0</c:if>
+        <c:if test="${item.product.productid == 4}">0</c:if>
+        <c:if test="${item.product.productid == 5}">0</c:if>
+        <c:if test="${item.product.productid == 6}">0</c:if>
+        <c:if test="${item.product.productid == 7}">0</c:if>
+        <c:if test="${item.product.productid == 8}">0</c:if>
+        <c:if test="${item.product.productid == 9}">0</c:if>-->
+        0<h:outputText value="#{item.product.productid}"></h:outputText>
+        </u>
+        </h924></td></tr></table> </td></tr> </table>  
+        
+       </div>
+       
+            
+        
+        
+    </td><td>    
+<div align='right' style="margin-bottom: -27px;">     
+        
+        
+        <p style="font-size:1em"><h9221>        <h:outputText value="#{item.product.price}"></h:outputText> </h9221><span class="rel arm" style="color: #F7D3A9; font-size: 20px;">&#x584;</span></p>      
+        </div>
+       
+       </td></tr></table>        
+        <div align='center' style="bottom: 0;">
+        <table>
+        <tr>
+        <td><img alt="" style="padding-top: 4px;" src="images/templatemo_shopping_cart.png"/></td>
+       	<td> 
+       	     
+       	     
+       	     
+       	     <h:inputText onkeypress='return isNumberKey(event)' value="#{item.count}" size="1" class="edit bk" >
+       	     </h:inputText>
+       	     
+       	     
+       	 </td>
+        <td>
+        
+        
+        
+        <div id="menu8">
+        <ul><li>
+       <h:commandLink style="font-size:16px;" value="Заказать">
+             <f:ajax execute="@form" listener="${index.Add(item)}" render=":ren :p${item.product.productid} :gen"/>
+       </h:commandLink>
+		</li></ul>
+		</div>
+       
+      
+       
+       
+        </td>
+        </tr>
+        </table>
+        
+        
+       
+        </div>
+        </h:form>  
+              
+        <div class="cleaner"></div>
+        </div></div1></c:if></c:if>
+        </c:forEach>
+            	<c:forEach items="#{indexrequest.mass}" var="item">
+    	<c:if test="${item.product.n==0}">
+    	
+    	
+        <div1>
+        <div class="product_box transition">
+        
+        
+         <h:form id="p${item.product.productid}">
+                <div align="center"><table><tr><td>
+      
+                
+               
+                </td><td> <c:if test="${cart.isCheck(item)}"><img alt="" src="images/gal.png" width="15" height="15"/></c:if></td><td>
+
+                
+        <h3214352>"<h:outputText value="#{item.product.name}"></h:outputText>"</h3214352></td><td>  <c:if test="${item.product.n==1}"><img alt="" src="images/3.gif" width="30" height="15"/></c:if></td>
+        </tr></table></div>
+        <a href="#info#{item.product.productid}" class="openModal">
+        <div class="tilt pic" style="margin: 0px 0px;"><img alt="" width="170" height="125" src="#{item.product.picture}" /></div>
+        </a>
+        
+        	
+        
+        
+       
+        
+        
+
+        
+<table><tr><td>
+
+        <div align='left'>
+       <table cellspacing="0"><tr><td><h921>  Арт: </h921></td><td> <table  cellspacing="0"><tr><td><h924><u>
+        <!--  <c:if test="${item.product.productid == 1}">0</c:if>
+        <c:if test="${item.product.productid == 2}">0</c:if>
+        <c:if test="${item.product.productid == 3}">0</c:if>
+        <c:if test="${item.product.productid == 4}">0</c:if>
+        <c:if test="${item.product.productid == 5}">0</c:if>
+        <c:if test="${item.product.productid == 6}">0</c:if>
+        <c:if test="${item.product.productid == 7}">0</c:if>
+        <c:if test="${item.product.productid == 8}">0</c:if>
+        <c:if test="${item.product.productid == 9}">0</c:if>-->
+        0<h:outputText value="#{item.product.productid}"></h:outputText>
+        </u>
+        </h924></td></tr></table> </td></tr> </table>  
+        
+       </div>
+       
+            
+        
+        
+    </td><td>    
+<div align='right' style="margin-bottom: -27px;">     
+        
+        
+        <p style="font-size:1em"><h9221>        <h:outputText value="#{item.product.price}"></h:outputText> </h9221><span class="rel arm" style="color: #F7D3A9; font-size: 20px;">&#x584;</span></p>      
+        </div>
+       
+       </td></tr></table>        
+        <div align='center' style="bottom: 0;">
+        <table>
+        <tr>
+        <td><img alt="" style="padding-top: 4px;" src="images/templatemo_shopping_cart.png"/></td>
+       	<td> 
+       	     
+       	     
+       	     
+       	     <h:inputText onkeypress='return isNumberKey(event)' value="#{item.count}" size="1" class="edit bk" >
+       	     </h:inputText>
+       	     
+       	     
+       	 </td>
+        <td>
+        
+        
+        
+        <div id="menu8">
+        <ul><li>
+       <h:commandLink style="font-size:16px;" value="Заказать">
+             <f:ajax execute="@form" listener="${index.Add(item)}" render=":ren :p${item.product.productid} :gen"/>
+       </h:commandLink>
+		</li></ul>
+		</div>
+       
+      
+       
+       
+        </td>
+        </tr>
+        </table>
+        
+        
+       
+        </div>
+        </h:form>  
+              
+        <div class="cleaner"></div>
+        </div></div1></c:if>
+        </c:forEach>
+</ul>
+          <c:forEach items="#{indexrequest.mass}" var="item">
+     <aside id="info#{item.product.productid}" class="modal">
+		<div>
+			<p>          
+
+			<table><tr><td></td></tr>
+			  <tr>
+			  <td>
+			  <table>
+			  <tr><td>
+			  <div align='center'><h311><c:if test="${item.product.subcategory.subcategoryid == 1}">Мыло</c:if><c:if test="${item.product.subcategory.subcategoryid == 2}">Мыло</c:if><c:if test="${item.product.subcategory.subcategoryid == 3}">Мыло</c:if> "<h:outputText value="${item.product.name}"></h:outputText>"</h311></div>
+			  </td></tr>
+			  <tr><td><img alt="" width="400" height="310" src="${item.product.picture}" /></td></tr>
+			  <tr><td>
+			  <div align='right'>Артикул:  
+			0<h:outputText value="#{item.product.productid}"></h:outputText></div> </td></tr>
+			  <tr><td>
+			    
+			    </td>
+			    </tr>
+			    <tr><td style='padding-left: 150px;'><div><p style="font-size:1em"><h9221><h:outputText value="#{item.product.price}"></h:outputText> </h9221><span class="rel arm" style="color: #F7D3A9; font-size: 20px;">&#x584;</span></p></div></td></tr>
+			  </table>
+			    
+			    
+			  </td>
+			    <td>    
+			          <table>
+			        <tr>
+			          <td width="760" valign="top" style='padding-left: 50px;'>            
+			          <h27>
+			        
+			          <div align='left' >Описание: </div></h27>
+			          <br></br>
+			          <div align='left'><h27>
+			          <script>
+					  document.write("${item.product.description}")
+					  </script></h27></div>
+					  
+			           <c:if test="${item.product.type == 0}"><div align='left'><h27>Примерный вес:  <h:outputText value="${item.product.weight}"></h:outputText> грамм.</h27></div></c:if>
+			          <br></br>
+			          <c:if test="${item.product.type == 1}"><div align='left'><h9> Цена за 100 грамм: </h9> <h911> <h:outputText value="${item.product.price}"></h:outputText></h911><h9> рублей.</h9></div></c:if>
+			          </td>
+			        </tr>
+			        <tr>
+			          <td> 
+			          </td>
+			        </tr>
+			        <tr>
+			          <td>
+			          
+			          </td>
+			        </tr>
+			       <tr>
+			        </tr>          
+			        <tr></tr>
+			        </table>
+			        
+			    </td>
+			    </tr>
+			</table>
+		</p>
+		<div align='left'>
+		
+<br></br>
+<br></br>
+
+
+
+        
+     
+        </div>
+			<a href="#close" title="Закрыть">Закрыть</a>
+		</div>
+	</aside>
+     </c:forEach>
+                            </div>
+            <div id="black" style="margin-top: 250px;">
+            </div>
+    
+    <div style="visibility: hidden"><table cellpadding="0" cellspacing="0" border="0" style="line-height:10px;">
+<tr><td colspan="2" style="padding:0;"><a href="http://www.24log.de" target="_blank"><img border="0" src="http://counter.24log.ru/buttons/cl4/41-0.gif" alt="html counter" title="" style="margin:0;padding:0;" /></a><a href="http://www.24log.ru" target="_blank"><img border="0" src="http://counter.24log.ru/count4_250704_41_1_6.pcx" alt="счетчик посетителей сайта" title="счетчик для сайта" style="margin:0;padding:0;" /></a></td></tr></table></div>
+    </ui:define>
+</ui:composition>

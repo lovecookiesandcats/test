@@ -1,0 +1,65 @@
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+    
+    <h:form>
+    
+        Фамилия: 
+    	<h:inputText id="lname" value="#{registerbean.fname}" size="10" maxlength="20">
+    	<f:validator validatorId="lvalidator" />
+    	</h:inputText>
+    	<h:message for="lname" style="color:red" />
+    	<br/>
+    	Имя: 
+    	<h:inputText id="fname" size="10" value="#{registerbean.lname}" maxlength="20">
+    	<f:validator validatorId="fvalidator" />
+    	</h:inputText>
+    	<h:message for="fname" style="color:red" />
+    	<br/>
+    	Отчество: 
+    	<h:inputText id="pname" value="#{registerbean.patron}" size="10" maxlength="20">
+    	<f:validator validatorId="pvalidator" />
+    	</h:inputText>
+    	<h:message for="pname" style="color:red" />
+    	<br/>
+    	Телефон: 
+    	<h:inputText id="phone" size="20" value="#{registerbean.phone}" maxlength="11" placeholder="89104828910">
+    	<f:validator validatorId="phonevalidator" />
+    	</h:inputText>
+    	<h:message for="phone" style="color:red" />
+    	<br/>
+    	E-mail: 
+    	<h:inputText id="email" value="#{registerbean.email}" size="30">
+    	<f:validator validatorId="evalidator" />
+    	</h:inputText>
+    	<h:message for="email" style="color:red" />
+    	<br/>
+    	Адрес:
+    	<h:inputText id="address" size="30" value="#{registerbean.address}" maxlength="150">
+    	<f:validator validatorId="avalidator" />
+    	</h:inputText>
+    	<h:message for="address" style="color:red" />
+    	<br/>
+    	Индекс:
+    	<h:inputText id="index" value="#{registerbean.index}" size="10" maxlength="6">
+    	<f:validator validatorId="ivalidator" />
+    	</h:inputText>
+    	<h:message for="index" style="color:red" />
+        
+        Логин:
+        <h:inputText id="login" value="#{registerbean.login}" size="10" maxlength="6"/>
+    	
+    	Пароль:
+    	<h:inputText id="password" value="#{registerbean.password}" size="10" maxlength="6"/>
+        
+        <h:commandButton action="${registerbean.Register()}" value="Регистрация" />
+        
+    </h:form>
+    
+    </ui:define>
+
+</ui:composition>

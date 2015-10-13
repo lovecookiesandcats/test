@@ -1,0 +1,210 @@
+<ui:composition template="/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+ <style type="text/css">
+        .ecol1 { vertical-align: top; padding-right : 25px }
+        .ecol2 { vertical-align: top; border-left: #ACBECE 1px solid; padding-left : 10px }
+        .rich-calendar-tool-btn{
+            font-family: Arial, Verdana;
+        } 
+    </style>
+    	
+
+    <ui:define name="title">
+        Оформление заказаdocument.getElementById('button').disabled = true;
+    </ui:define>
+
+    <ui:define name="content">
+    <h14>Оформление заказа: </h14>
+    <br></br>
+  
+  
+    <h:form id="fr">
+    
+    
+
+
+
+
+   
+
+
+    
+    <div align="right" style="margin-right: 70px;">
+    
+    	
+    	
+    	<table class="features-table1" width="300px">
+
+    	
+
+    	
+
+    	
+    	<tr>
+    	<td>
+    	Фамилия: </td><td colspan="5">
+    	<h:inputText id="lname" value="#{order.lname}" size="60" maxlength="20" style="font-size: 24px;">
+    	</h:inputText>
+    	
+    	</td>
+    	</tr>
+    	
+    	<tr>
+    	<td>
+    	Имя: </td><td colspan="5">
+    	<h:inputText id="fname" size="60" value="#{order.fname}" maxlength="20" style="font-size: 24px;">
+    	</h:inputText>
+    	</td>
+    	</tr>
+    	
+    	<tr>
+    	<td>
+    	Отчество: </td><td colspan="5">
+    	<h:inputText id="pname" value="#{order.patron}" size="60" maxlength="20" style="font-size: 24px;">
+    	</h:inputText>
+
+    	</td>
+    	</tr>
+    	
+    	
+    	    	<tr>
+    	<td>
+    	Телефон: 
+    	</td><td>
+    	<h:inputText id="phone" size="20" style="font-size: 24px;" value="#{order.phone}" required="true" maxlength="11" requiredMessage="Введите номер вашего мобильного телефона">
+    	       <f:validator validatorId="phonevalidator" />
+    	</h:inputText>
+    	<h91>*</h91>
+    	</td><td  colspan="4"><h91><h:message for="phone" style="color:red" /></h91></td>
+    	</tr>
+    	
+    	<tr>
+    	<td>
+    	E-mail: 
+    	</td><td colspan="5">
+    	<h:inputText id="email" value="#{order.email}" size="60" style="font-size: 24px;">
+    	</h:inputText>
+    	</td>
+    	</tr>
+    	
+    	<tr>
+    	</tr>
+    	
+    	<tr>
+    	<td>Адрес: </td><td colspan="5">
+    	<h:inputText id="address" size="60" value="#{order.address}" maxlength="200" style="font-size: 24px;">
+    	</h:inputText>
+    	
+    	</td>
+    	</tr>
+    	
+    	<!-- <tr>
+    	<td>Индекс: </td><td colspan="5">
+    	<h:inputText id="index" value="#{order.index}" size="10" maxlength="6" style="font-size: 24px;">
+    	</h:inputText>
+    	
+    	</td>
+    	</tr> -->
+    	
+    	<tr>
+    	<td colspan="4">В какой день недели вам было бы удобно получить доставку</td><td colspan="2">
+    	<h:selectOneMenu value="#{order.day}">
+            <f:selectItem itemValue="Понедельник" itemLabel="Понедельник" />
+            <f:selectItem itemValue="Вторник" itemLabel="Вторник" />
+            <f:selectItem itemValue="Среда" itemLabel="Среда" />
+            <f:selectItem itemValue="Четверг" itemLabel="Четверг" />
+            <f:selectItem itemValue="Пятница" itemLabel="Пятница" />
+            <f:selectItem itemValue="Суббота" itemLabel="Суббота" />
+            <f:selectItem itemValue="Воскресение" itemLabel="Воскресение" />				
+         </h:selectOneMenu>
+    	</td>
+    	</tr>
+    	<tr>
+    	<td colspan="4">В какое время вам было бы удобно получить доставку</td>
+    	<td colspan="2">
+    	<h:selectOneMenu value="#{order.time}">
+            <f:selectItem itemValue="9-12" itemLabel="9-12" />
+            <f:selectItem itemValue="13-16" itemLabel="13-16" />
+            <f:selectItem itemValue="16-19" itemLabel="16-19" />
+            <f:selectItem itemValue="19-21" itemLabel="19-21" />				
+        </h:selectOneMenu>
+    	</td>
+    	</tr>
+    	
+    	</table>
+    	</div>
+    	<br></br>
+		<div align="right" style="margin-right: 70px;" >
+		
+		 <div id="foo">
+     
+         </div>
+		
+		
+    	<h:commandButton id="button" image="images/go.png">
+    	   	 <f:ajax execute="@form" onevent="handleDisableButton" listener="#{order.CreateOrder()}" render=":fr"/>
+    	</h:commandButton>
+    	
+        </div>
+        
+        
+     <div style="visibility: hidden"><table cellpadding="0" cellspacing="0" border="0" style="line-height:10px;">
+<tr><td colspan="2" style="padding:0;"><a href="http://www.24log.de" target="_blank"><img border="0" src="http://counter.24log.ru/buttons/cl4/53-0.gif" alt="html counter" title="" style="margin:0;padding:0;" /></a><a href="http://www.24log.ru" target="_blank"><img border="0" src="http://counter.24log.ru/count4_250700_53_1_6.pcx" alt="счетчик посетителей сайта" title="счетчик для сайта" style="margin:0;padding:0;" /></a></td></tr></table></div>
+     </h:form>
+     
+     
+     <script>
+     function handleDisableButton(data) {
+    	    var buttonElement = data.source;
+    	    var ajaxStatus = data.status; // Can be "begin", "complete" and "success".
+
+    	    switch (ajaxStatus) {
+    	        case "begin": // This is called right before ajax request is been sent.
+
+    	        	 var opts = {
+    	      		  lines: 9, // The number of lines to draw
+    	      		  length: 0, // The length of each line
+    	      		  width: 10, // The line thickness
+    	      		  radius: 15, // The radius of the inner circle
+    	      		  corners: 0.9, // Corner roundness (0..1)
+    	      		  rotate: 36, // The rotation offset
+    	      		  direction: 1, // 1: clockwise, -1: counterclockwise
+    	      		  color: '#000', // #rgb or #rrggbb or array of colors
+    	      		  speed: 2.2, // Rounds per second
+    	      		  trail: 60, // Afterglow percentage
+    	      		  shadow: true, // Whether to render a shadow
+    	      		  hwaccel: true, // Whether to use hardware acceleration
+    	      		  className: 'spinner', // The CSS class to assign to the spinner
+    	      		  zIndex: 2e9, // The z-index (defaults to 2000000000)
+    	      		  top: '50%', // Top position relative to parent
+    	      		  left: '50%' // Left position relative to parent
+    	      		};
+    	      		var target = document.getElementById('foo');
+    	      		var spinner = new Spinner(opts).spin(target);
+ 
+    	            buttonElement.disabled = true;
+    	            break;
+
+    	        case "complete": // This is called right after ajax response is received.
+    	            // We don't want to enable it yet here, right?
+    	            break;
+
+    	        case "success": // This is called when ajax response is successfully processed.
+    	  
+    	            buttonElement.disabled = false;
+    	            break;
+    	    }
+    	}
+     </script>
+     
+    
+
+        
+    </ui:define>
+</ui:composition>
